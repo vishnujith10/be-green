@@ -1,32 +1,55 @@
 import { CheckCircle } from 'lucide-react'
 
-export interface Benefit {
-  title?: string
-  description: string
-}
-
 interface HealthBenefitsProps {
-  benefits: string[] | Benefit[]
+  benefits: string[]
 }
 
-export function HealthBenefits({ benefits }: HealthBenefitsProps) {
-  return (
-    <div className="space-y-4">
-      {benefits.map((benefit, index) => {
-        const isString = typeof benefit === 'string'
-        const title = isString ? undefined : benefit.title
-        const description = isString ? benefit : benefit.description
+export function HealthBenefits({
+  benefits,
+}: HealthBenefitsProps) {
+  const sections: { title: string; items: string[] }[] = []
 
-        return (
-          <div key={index} className="flex items-start gap-3 bg-muted/30 p-4 rounded-xl border border-border/50">
-            <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-            <div>
-              {title && <h4 className="font-semibold text-foreground text-base mb-1">{title}</h4>}
-              <p className="text-foreground/70 leading-relaxed text-sm md:text-base">{description}</p>
-            </div>
-          </div>
-        )
-      })}
+  let currentSection: { title: string; items: string[] } | null = null
+
+  benefits.forEach((item) => {
+    if (!item.startsWith('•')) {
+      if (currentSection) sections.push(currentSection)
+
+      currentSection = {
+        title: item,
+        items: [],
+      }
+    } else {
+      currentSection?.items.push(item.replace('• ', ''))
+    }
+  })
+
+  if (currentSection) sections.push(currentSection)
+
+  return (
+    <div className="space-y-6">
+      {sections.map((section, index) => (
+        <div
+          key={index}
+          className="bg-muted/30 border border-border/50 rounded-xl p-5"
+        >
+          <h3 className="font-bold text-lg mb-3 text-foreground">
+            {section.title}
+          </h3>
+
+          <ul className="space-y-2">
+            {section.items.map((item, idx) => (
+              <li
+                key={idx}
+                className="flex items-start gap-2 text-foreground/80"
+              >
+                <CheckCircle className="w-4 h-4 text-primary mt-1 flex-shrink-0" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
     </div>
   )
 }

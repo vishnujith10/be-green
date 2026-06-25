@@ -27,14 +27,12 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="#products" className="text-white/70 hover:text-white transition-colors text-sm">
+                <Link href="#coming-soon" className="text-white/70 hover:text-white transition-colors text-sm">
                   Coming Soon
                 </Link>
               </li>
               <li>
-                <Link href="#products" className="text-white/70 hover:text-white transition-colors text-sm">
-                  Bulk Orders
-                </Link>
+                {/* Bulk Orders removed as not implemented */}
               </li>
             </ul>
           </div>
@@ -44,14 +42,12 @@ export function Footer() {
             <h4 className="font-semibold mb-4">Company</h4>
             <ul className="space-y-2">
               <li>
-                <Link href="#why" className="text-white/70 hover:text-white transition-colors text-sm">
+                <Link href="#about" className="text-white/70 hover:text-white transition-colors text-sm">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="#process" className="text-white/70 hover:text-white transition-colors text-sm">
-                  Growing Process
-                </Link>
+                {/* Growing Process link disabled */}
               </li>
               <li>
                 <Link href="#contact" className="text-white/70 hover:text-white transition-colors text-sm">
@@ -66,7 +62,10 @@ export function Footer() {
             <h4 className="font-semibold mb-4">Follow Us</h4>
             <div className="flex gap-4">
               <a
-                href="#"
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=begreen0406@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Email BE GREEN"
                 className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 transition-colors flex items-center justify-center"
               >
                 <Mail className="w-5 h-5" />
@@ -94,10 +93,17 @@ export function Footer() {
               &copy; 2024 BE GREEN. All rights reserved.
             </p>
             <div className="flex gap-6">
-              <Link href="#" className="text-white/60 hover:text-white transition-colors text-sm">
+              <Link
+                href="/privacy-policy"
+                className="text-white/60 hover:text-white transition-colors text-sm"
+              >
                 Privacy Policy
               </Link>
-              <Link href="#" className="text-white/60 hover:text-white transition-colors text-sm">
+
+              <Link
+                href="/terms-of-service"
+                className="text-white/60 hover:text-white transition-colors text-sm"
+              >
                 Terms of Service
               </Link>
             </div>

@@ -17,15 +17,20 @@ export function Contact() {
             <div className="inline-flex items-center justify-center h-14 w-14 rounded-2xl bg-muted mb-4">
               <Mail className="h-7 w-7 text-primary" />
             </div>
+
             <h3 className="text-lg font-semibold text-foreground">Email</h3>
+
             <p className="text-foreground/60 text-sm mt-2">
               Get in touch with our support team
             </p>
+
             <a
-              href="mailto:hello@begreen.farm"
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=begreen0406@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
               className="mt-4 inline-block text-primary font-semibold hover:text-primary/80 transition-colors"
             >
-              hello@begreen.farm
+              begreen0406@gmail.com
             </a>
           </div>
 
@@ -34,15 +39,18 @@ export function Contact() {
             <div className="inline-flex items-center justify-center h-14 w-14 rounded-2xl bg-muted mb-4">
               <Phone className="h-7 w-7 text-primary" />
             </div>
+
             <h3 className="text-lg font-semibold text-foreground">Phone</h3>
+
             <p className="text-foreground/60 text-sm mt-2">
-              Call us for immediate assistance
+              Call or WhatsApp us for orders and assistance
             </p>
+
             <a
-              href="tel:+15551234567"
+              href="tel:+919656207196"
               className="mt-4 inline-block text-primary font-semibold hover:text-primary/80 transition-colors"
             >
-              +1 (555) 123-4567
+              +91 96562 07196
             </a>
           </div>
 
@@ -51,14 +59,21 @@ export function Contact() {
             <div className="inline-flex items-center justify-center h-14 w-14 rounded-2xl bg-muted mb-4">
               <MapPin className="h-7 w-7 text-primary" />
             </div>
+
             <h3 className="text-lg font-semibold text-foreground">Visit Us</h3>
+
             <p className="text-foreground/60 text-sm mt-2">
-              Come see our farm
+              Find our farm location on Google Maps
             </p>
-            <p className="mt-4 text-primary font-semibold text-sm">
-              123 Green Lane<br />
-              Farm Valley, CA 95123
-            </p>
+
+            <a
+              href="https://maps.app.goo.gl/pER6PcmRNU2cKt3w6?g_st=ac"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-block text-primary font-semibold hover:text-primary/80 transition-colors"
+            >
+              View Location on Map
+            </a>
           </div>
         </div>
       </div>

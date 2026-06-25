@@ -9,9 +9,17 @@ interface OrderSectionProps {
 
 export function OrderSection({ productName, price }: OrderSectionProps) {
   const handleWhatsAppOrder = () => {
-    const message = `Hi, I'm interested in ordering ${productName}${price ? ` ($${price})` : ''}. Can you provide more details?`
+    const phoneNumber = '919656207196'
+
+    const message = `Hi, I’m interested in your fresh microgreens 
+Kindly share varieties, pricing, and delivery details.`
+
     const encodedMessage = encodeURIComponent(message)
-    window.open(`https://wa.me/?text=${encodedMessage}`, '_blank')
+
+    window.open(
+      `https://wa.me/${phoneNumber}?text=${encodedMessage}`,
+      '_blank'
+    )
   }
 
   return (
@@ -38,9 +46,11 @@ export function OrderSection({ productName, price }: OrderSectionProps) {
         </div>
 
         <p className="text-sm text-primary-foreground/70">
-          ✓ Fresh delivery within 24 hours<br/>
-          ✓ Free shipping on orders over $30<br/>
-          ✓ Satisfaction guaranteed
+          ✓  Order anytime (no time limit)<br />
+          ✓ Weekly & monthly subscription<br />
+          ✓ Free delivery on subscription <br />
+          ✓ Clean & safe growing <br />
+          ✓ Direct from grower to you<br />
         </p>
       </div>
     </div>

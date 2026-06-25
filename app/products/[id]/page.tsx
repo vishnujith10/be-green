@@ -6,9 +6,11 @@ import { ProductGallery } from '@/components/ProductGallery'
 import { NutritionCards } from '@/components/NutritionCards'
 import { HealthBenefits } from '@/components/HealthBenefits'
 import { OrderSection } from '@/components/OrderSection'
+import { Reviews } from '@/components/Reviews'
 import { Navbar } from '@/components/Navbar'
 import { Footer } from '@/components/Footer'
 import { ChevronLeft } from 'lucide-react'
+import { createClient } from '@/utils/supabase/server'
 import type { Metadata } from 'next'
 
 interface PageProps {
@@ -19,7 +21,10 @@ interface PageProps {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { id } = await params
-  const product = getProductById(id)
+console.log("URL PARAM:", id)
+
+const product = await getProductById(id)
+console.log("PRODUCT FOUND:", product)
 
   if (!product) {
     return {
@@ -35,11 +40,26 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ProductPage({ params }: PageProps) {
   const { id } = await params
-  const product = getProductById(id)
+  const product = await getProductById(id)
 
   if (!product) {
     notFound()
   }
+
+  // Fetch reviews for this product
+  const supabase = await createClient()
+  const { data: reviewsData } = await supabase
+    .from('reviews')
+    .select('id, rating, review, users(username)')
+    .eq('product_id', product.id)
+    .order('created_at', { ascending: false })
+
+  const reviews = (reviewsData ?? []).map((r: { id: string; rating: number; review: string; users: { username: string } | null }) => ({
+    id: r.id,
+    name: r.users?.username ?? 'Anonymous',
+    content: r.review ?? '',
+    rating: r.rating
+  }))
 
   return (
     <main className="bg-background text-foreground">
@@ -105,12 +125,12 @@ export default async function ProductPage({ params }: PageProps) {
             </div>
           </div>
 
-          {/* Nutrition Section */}
+          {/* Nutrition & Benefits Section */}
           {product.status === 'available' && (
             <div className="space-y-8 mb-16">
               <div>
                 <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-8">
-                  Nutrition & Benefits
+                  Nutrition &amp; Benefits
                 </h2>
               </div>
 
@@ -131,9 +151,12 @@ export default async function ProductPage({ params }: PageProps) {
             </div>
           )}
 
+          {/* Reviews Section */}
+          <Reviews productId={product.id} reviews={reviews} />
+
           {/* CTA Section */}
           {product.status === 'available' && (
-            <div className="rounded-2xl bg-primary/5 border border-primary/20 p-8 md:p-12 text-center">
+            <div className="rounded-2xl bg-primary/5 border border-primary/20 p-8 md:p-12 text-center mt-16">
               <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
                 Experience the BE GREEN Difference
               </h2>

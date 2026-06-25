@@ -2,49 +2,43 @@ import Image from 'next/image'
 import { getComingSoonProducts } from '@/lib/products'
 import { Clock } from 'lucide-react'
 
-export function ComingSoon() {
-  const products = getComingSoonProducts()
+export async function ComingSoon() {
+  const products = await getComingSoonProducts()
+
+  if (products.length === 0) return null
 
   return (
-    <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-background">
-      <div className="max-w-6xl mx-auto">
+    <section id="coming-soon" className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-[#FDFBF7]">
+      <div className="max-w-7xl mx-auto">
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 lg:mb-20">
-          <span className="text-primary text-sm font-semibold">Coming Soon</span>
-          <h2 className="text-4xl sm:text-5xl font-bold text-foreground mt-2 text-balance">
-            Exciting varieties on the way
+          <span className="text-primary text-sm font-semibold tracking-wider uppercase mb-3 block">Coming Soon</span>
+          <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-6 font-serif">
+            Growing in the Lab
           </h2>
-          <p className="text-foreground/60 mt-4 text-lg">
-            We&apos;re expanding our selection. Stay tuned for these premium microgreens varieties.
+          <p className="text-lg text-foreground/60 leading-relaxed text-balance">
+            We're constantly experimenting with new varieties. Here's what's sprouting next.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {products.map((product) => (
-            <div
-              key={product.id}
-              className="group relative rounded-2xl overflow-hidden h-80 bg-card border border-border hover:border-primary/30 transition-all duration-300"
-            >
-              {/* Product Image */}
-              <Image
-                src={product.image}
-                alt={product.name}
-                fill
-                className="object-cover group-hover:scale-105 transition-transform duration-300 opacity-60"
-              />
-
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors" />
-
-              {/* Coming Soon Badge */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center space-y-3">
-                  <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">
-                    <Clock className="w-5 h-5 text-white" />
-                    <span className="text-white font-semibold text-sm">Coming Soon</span>
-                  </div>
-                  <h3 className="text-2xl font-bold text-white">{product.name}</h3>
-                  <p className="text-white/80 text-sm">{product.tagline}</p>
+            <div key={product.id} className="group relative bg-white rounded-3xl overflow-hidden border border-black/[0.04] shadow-sm hover:shadow-lg transition-all duration-300">
+              <div className="aspect-[4/3] relative bg-muted/20">
+                <Image
+                  src={product.image}
+                  alt={product.name}
+                  fill
+                  className="object-cover opacity-80 mix-blend-multiply group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-sm">
+                  <Clock className="w-3.5 h-3.5 text-primary" />
+                  <span className="text-xs font-bold text-foreground">In Development</span>
                 </div>
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-bold text-foreground mb-2 font-serif">{product.name}</h3>
+                <p className="text-sm text-foreground/60 line-clamp-2">{product.description}</p>
               </div>
             </div>
           ))}

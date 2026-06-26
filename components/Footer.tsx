@@ -1,5 +1,6 @@
 import Link from 'next/link'
-import { Leaf, Mail, Heart, Share2 } from 'lucide-react'
+import Image from 'next/image'
+import { Mail, Heart, Share2 } from 'lucide-react'
 
 export function Footer() {
   return (
@@ -8,10 +9,15 @@ export function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* Brand */}
           <div className="space-y-4">
-            <div className="flex items-center gap-2">
-              <Leaf className="w-6 h-6 text-muted" />
-              <span className="font-bold text-lg">BE GREEN</span>
-            </div>
+            <Link href="/" className="inline-flex items-center">
+              <Image
+                src="/images/logo-white.png"
+                alt="BE GREEN"
+                width={3000}
+                height={100}
+                className="h-25 w-auto object-contain"
+              />
+            </Link>
             <p className="text-white/70 text-sm">
               Premium microgreens delivered fresh to your door. Be Fresh. Be Green.
             </p>

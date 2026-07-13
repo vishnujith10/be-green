@@ -9,7 +9,7 @@ import { OrderSection } from '@/components/OrderSection'
 import { Reviews } from '@/components/Reviews'
 import { Navbar } from '@/components/Navbar'
 import { Footer } from '@/components/Footer'
-import { ChevronLeft } from 'lucide-react'
+import { BackButton } from '@/components/BackButton'
 import { createClient } from '@/utils/supabase/server'
 import type { Metadata } from 'next'
 
@@ -66,15 +66,7 @@ export default async function ProductPage({ params }: PageProps) {
       <Navbar />
       <div className="pt-24">
         {/* Breadcrumb */}
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <Link
-            href="/#products"
-            className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors font-medium"
-          >
-            <ChevronLeft className="w-5 h-5" />
-            Back to Products
-          </Link>
-        </div>
+        <BackButton />
 
         {/* Product Section */}
         <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">

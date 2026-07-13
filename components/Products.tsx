@@ -38,7 +38,7 @@ export async function Products() {
                     </span>
                   </div>
                 </div>
-                
+
                 <div className="p-6 sm:p-8">
                   <div className="flex justify-between items-start mb-4">
                     <div>
@@ -50,10 +50,10 @@ export async function Products() {
                       </p>
                     </div>
                     <div className="bg-primary/10 text-primary font-bold px-3 py-1.5 rounded-lg text-sm whitespace-nowrap">
-                      ${product.price}
+                      ₹{product.price}
                     </div>
                   </div>
-                  
+
                   <p className="text-foreground/60 text-sm line-clamp-2 mb-6">
                     {product.description}
                   </p>

@@ -1,6 +1,7 @@
 export type AppUser = {
   id: string
   username: string
+  role?: 'admin' | 'user'
 }
 
 // 7 days in milliseconds
@@ -44,4 +45,9 @@ export function saveUser(user: AppUser) {
 export function clearUser() {
   localStorage.removeItem('user')
   window.dispatchEvent(new Event('user-changed'))
+}
+
+export function isAdminUser(): boolean {
+  const user = getStoredUser()
+  return user?.role === 'admin'
 }

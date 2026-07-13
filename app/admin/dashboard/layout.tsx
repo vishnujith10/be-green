@@ -17,10 +17,12 @@ export default function AdminDashboardLayout({
 
   useEffect(() => {
     const user = getStoredUser()
+
     if (!user || user.role !== 'admin') {
       router.replace('/admin')
       return
     }
+
     setAuthorized(true)
     setChecking(false)
   }, [router])
@@ -36,9 +38,12 @@ export default function AdminDashboardLayout({
   if (!authorized) return null
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-[#F8FAF8]">
       <AdminSidebar />
-      <main className="ml-64 p-8">
+
+      {/* Desktop: sidebar takes 256px (w-64)
+          Mobile: only top bar exists, so just add top padding */}
+      <main className="pt-24 md:pt-8 md:ml-64 px-4 sm:px-6 md:px-8 pb-8">
         {children}
       </main>
     </div>

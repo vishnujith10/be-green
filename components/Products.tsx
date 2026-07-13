@@ -22,7 +22,7 @@ export async function Products() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
           {products.map((product, index) => (
-            <Link key={product.id} href={`/products/${product.slug}`} className="group block">
+            <Link key={product.id} href={`/products/₹{product.slug}`} className="group block">
               <div className="relative bg-background rounded-3xl overflow-hidden border border-border shadow-sm hover:shadow-xl transition-all duration-300">
                 <div className="aspect-[4/3] relative bg-muted/30 overflow-hidden">
                   <Image

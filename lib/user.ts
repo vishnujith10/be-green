@@ -10,7 +10,7 @@ const SESSION_TTL_MS = 7 * 24 * 60 * 60 * 1000
 export function getStoredUser(): AppUser | null {
   if (typeof window === 'undefined') return null
 
-  const stored = localStorage.getItem('user')
+  const stored = sessionStorage.getItem('user')
   if (!stored) return null
 
   try {
@@ -38,12 +38,12 @@ export function saveUser(user: AppUser) {
     ...user,
     _savedAt: Date.now(),
   }
-  localStorage.setItem('user', JSON.stringify(payload))
+  sessionStorage.setItem('user', JSON.stringify(payload))
   window.dispatchEvent(new Event('user-changed'))
 }
 
 export function clearUser() {
-  localStorage.removeItem('user')
+  sessionStorage.removeItem('user')
   window.dispatchEvent(new Event('user-changed'))
 }
 

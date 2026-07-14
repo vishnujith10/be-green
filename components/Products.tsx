@@ -22,54 +22,95 @@ export async function Products() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
           {products.map((product, index) => (
-            <Link key={product.id} href={`/products/₹{product.slug}`} className="group block">
-              <div className="relative bg-background rounded-3xl overflow-hidden border border-border shadow-sm hover:shadow-xl transition-all duration-300">
-                <div className="aspect-[4/3] relative bg-muted/30 overflow-hidden">
-                  <Image
-                    src={product.image}
-                    alt={product.name}
-                    fill
-                    priority={index === 0}
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute top-4 left-4">
-                    <span className="bg-white/90 backdrop-blur-sm text-foreground text-xs font-bold px-3 py-1.5 rounded-full shadow-sm">
-                      Best Seller
-                    </span>
-                  </div>
-                </div>
-
-                <div className="p-6 sm:p-8">
-                  <div className="flex justify-between items-start mb-4">
-                    <div>
-                      <h3 className="text-2xl font-bold text-foreground mb-2 font-serif group-hover:text-primary transition-colors">
-                        {product.name}
-                      </h3>
-                      <p className="text-sm font-medium text-primary">
-                        {product.tagline}
-                      </p>
-                    </div>
-                    <div className="bg-primary/10 text-primary font-bold px-3 py-1.5 rounded-lg text-sm whitespace-nowrap">
-                      ₹{product.price}
+            product.in_stock === false ? (
+              <div key={product.id} className="group block opacity-70">
+                <div className="relative bg-background rounded-3xl overflow-hidden border border-border shadow-sm">
+                  <div className="aspect-[4/3] relative bg-muted/30 overflow-hidden">
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      fill
+                      priority={index === 0}
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-background/60 backdrop-blur-[2px] flex items-center justify-center">
+                      <span className="px-5 py-2.5 bg-background text-foreground font-bold rounded-full shadow-lg border border-border tracking-wide uppercase text-sm">
+                        Out of Stock
+                      </span>
                     </div>
                   </div>
-
-                  <p className="text-foreground/60 text-sm line-clamp-2 mb-6">
-                    {product.description}
-                  </p>
-
-                  <div className="flex items-center justify-between mt-auto pt-4 border-t border-border">
-                    <Button variant="ghost" className="group-hover:text-primary p-0 h-auto hover:bg-transparent">
-                      <span className="font-semibold">View Details</span>
-                      <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                    </Button>
-                    <Button size="icon" className="rounded-full h-10 w-10 shadow-md hover:shadow-lg transition-all group-hover:scale-110">
-                      <ShoppingBag className="h-4 w-4" />
-                    </Button>
+                  <div className="p-6 sm:p-8">
+                    <div className="flex justify-between items-start mb-4">
+                      <div>
+                        <h3 className="text-2xl font-bold text-foreground mb-2 font-serif">
+                          {product.name}
+                        </h3>
+                        <p className="text-sm font-medium text-foreground/60">
+                          {product.tagline}
+                        </p>
+                      </div>
+                      <div className="bg-muted text-foreground/60 font-bold px-3 py-1.5 rounded-lg text-sm whitespace-nowrap">
+                        ₹{product.price}
+                      </div>
+                    </div>
+                    <p className="text-foreground/60 text-sm line-clamp-2 mb-6">
+                      {product.description}
+                    </p>
+                    <div className="flex items-center justify-between mt-auto pt-4 border-t border-border">
+                      <Button variant="ghost" disabled className="p-0 h-auto opacity-50">
+                        <span className="font-semibold">Unavailable</span>
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </div>
-            </Link>
+            ) : (
+              <Link key={product.id} href={`/products/${product.slug}`} className="group block">
+                <div className="relative bg-background rounded-3xl overflow-hidden border border-border shadow-sm hover:shadow-xl transition-all duration-300">
+                  <div className="aspect-[4/3] relative bg-muted/30 overflow-hidden">
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      fill
+                      priority={index === 0}
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute top-4 left-4">
+                      <span className="bg-white/90 backdrop-blur-sm text-foreground text-xs font-bold px-3 py-1.5 rounded-full shadow-sm">
+                        Best Seller
+                      </span>
+                    </div>
+                  </div>
+                  <div className="p-6 sm:p-8">
+                    <div className="flex justify-between items-start mb-4">
+                      <div>
+                        <h3 className="text-2xl font-bold text-foreground mb-2 font-serif group-hover:text-primary transition-colors">
+                          {product.name}
+                        </h3>
+                        <p className="text-sm font-medium text-primary">
+                          {product.tagline}
+                        </p>
+                      </div>
+                      <div className="bg-primary/10 text-primary font-bold px-3 py-1.5 rounded-lg text-sm whitespace-nowrap">
+                        ₹{product.price}
+                      </div>
+                    </div>
+                    <p className="text-foreground/60 text-sm line-clamp-2 mb-6">
+                      {product.description}
+                    </p>
+                    <div className="flex items-center justify-between mt-auto pt-4 border-t border-border">
+                      <Button variant="ghost" className="group-hover:text-primary p-0 h-auto hover:bg-transparent">
+                        <span className="font-semibold">View Details</span>
+                        <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                      </Button>
+                      <Button size="icon" className="rounded-full h-10 w-10 shadow-md hover:shadow-lg transition-all group-hover:scale-110">
+                        <ShoppingBag className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            )
           ))}
         </div>
       </div>

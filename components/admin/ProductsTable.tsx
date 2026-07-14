@@ -232,23 +232,40 @@ export default function ProductsTable({
                     </td>
 
                     <td className="px-6 py-4">
-                      <span
-                        className={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-semibold ${product.available
-                            ? 'bg-green-100 text-green-700'
-                            : 'bg-yellow-100 text-yellow-700'
-                          }`}
-                      >
+                      <div className="flex flex-col gap-2">
                         <span
-                          className={`w-2 h-2 rounded-full ${product.available
-                              ? 'bg-green-500'
-                              : 'bg-yellow-500'
+                          className={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-semibold ${product.available
+                              ? 'bg-green-100 text-green-700'
+                              : 'bg-yellow-100 text-yellow-700'
                             }`}
-                        />
+                        >
+                          <span
+                            className={`w-2 h-2 rounded-full ${product.available
+                                ? 'bg-green-500'
+                                : 'bg-yellow-500'
+                              }`}
+                          />
 
-                        {product.available
-                          ? 'Available'
-                          : 'Coming Soon'}
-                      </span>
+                          {product.available
+                            ? 'Available'
+                            : 'Coming Soon'}
+                        </span>
+                        
+                        <span
+                          className={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-semibold ${product.in_stock !== false
+                              ? 'bg-blue-100 text-blue-700'
+                              : 'bg-red-100 text-red-700'
+                            }`}
+                        >
+                          <span
+                            className={`w-2 h-2 rounded-full ${product.in_stock !== false
+                                ? 'bg-blue-500'
+                                : 'bg-red-500'
+                              }`}
+                          />
+                          {product.in_stock !== false ? 'In Stock' : 'Out of Stock'}
+                        </span>
+                      </div>
                     </td>
 
                     <td className="px-6 py-4">
@@ -378,16 +395,27 @@ export default function ProductsTable({
                       : '—'}
                   </p>
 
-                  <span
-                    className={`inline-flex mt-2 items-center rounded-full px-3 py-1 text-xs font-semibold ${product.available
-                        ? 'bg-green-100 text-green-700'
-                        : 'bg-yellow-100 text-yellow-700'
-                      }`}
-                  >
-                    {product.available
-                      ? 'Available'
-                      : 'Coming Soon'}
-                  </span>
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    <span
+                      className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold ${product.available
+                          ? 'bg-green-100 text-green-700'
+                          : 'bg-yellow-100 text-yellow-700'
+                        }`}
+                    >
+                      {product.available
+                        ? 'Available'
+                        : 'Coming Soon'}
+                    </span>
+                    
+                    <span
+                      className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold ${product.in_stock !== false
+                          ? 'bg-blue-100 text-blue-700'
+                          : 'bg-red-100 text-red-700'
+                        }`}
+                    >
+                      {product.in_stock !== false ? 'In Stock' : 'Out of Stock'}
+                    </span>
+                  </div>
 
                 </div>
 

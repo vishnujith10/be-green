@@ -23,6 +23,7 @@ interface ProductFormProps {
     main_image: string
     price: number | null
     available: boolean
+    in_stock: boolean
     nutrition: Record<string, string>
     health_benefits: string[]
     gallery_images: string[]
@@ -71,6 +72,10 @@ export default function ProductForm({
 
   const [available, setAvailable] = useState(
     initialData?.available ?? true
+  )
+
+  const [inStock, setInStock] = useState(
+    initialData?.in_stock ?? true
   )
 
   const [nutrition, setNutrition] = useState<Record<string, string>>(
@@ -198,6 +203,7 @@ export default function ProductForm({
         main_image: mainImageUrl,
         price: price ? Number(price) : null,
         available,
+        in_stock: inStock,
         nutrition,
         health_benefits: benefits.filter((b) =>
           b.trim()
@@ -374,32 +380,62 @@ export default function ProductForm({
                 />
               </div>
 
-              <div className="flex items-end">
-                <label className="flex items-center gap-3">
+              <div className="flex flex-col gap-4">
+                <div className="flex items-end">
+                  <label className="flex items-center gap-3">
 
-                  <button
-                    type="button"
-                    onClick={() => setAvailable(!available)}
-                    className={`relative h-7 w-12 rounded-full transition ${available
+                    <button
+                      type="button"
+                      onClick={() => setAvailable(!available)}
+                      className={`relative h-7 w-12 rounded-full transition ${available
                         ? 'bg-emerald-500'
                         : 'bg-gray-300'
-                      }`}
-                  >
-                    <span
-                      className={`absolute left-0.5 top-0.5 h-6 w-6 rounded-full bg-white transition ${available
+                        }`}
+                    >
+                      <span
+                        className={`absolute left-0.5 top-0.5 h-6 w-6 rounded-full bg-white transition ${available
                           ? 'translate-x-5'
                           : ''
+                          }`}
+                      />
+                    </button>
+
+                    <span className="text-sm font-medium">
+                      {available
+                        ? 'Available'
+                        : 'Coming Soon'}
+                    </span>
+
+                  </label>
+                </div>
+
+                <div className="flex items-end">
+                  <label className="flex items-center gap-3">
+
+                    <button
+                      type="button"
+                      onClick={() => setInStock(!inStock)}
+                      className={`relative h-7 w-12 rounded-full transition ${inStock
+                        ? 'bg-emerald-500'
+                        : 'bg-gray-300'
                         }`}
-                    />
-                  </button>
+                    >
+                      <span
+                        className={`absolute left-0.5 top-0.5 h-6 w-6 rounded-full bg-white transition ${inStock
+                          ? 'translate-x-5'
+                          : ''
+                          }`}
+                      />
+                    </button>
 
-                  <span className="text-sm font-medium">
-                    {available
-                      ? 'Available'
-                      : 'Coming Soon'}
-                  </span>
+                    <span className="text-sm font-medium">
+                      {inStock
+                        ? 'In Stock'
+                        : 'Out of Stock'}
+                    </span>
 
-                </label>
+                  </label>
+                </div>
               </div>
 
             </div>
@@ -529,7 +565,7 @@ export default function ProductForm({
               </div>
 
             </div>
-          //part2
+
           </fieldset>
 
           {/* Nutrition */}

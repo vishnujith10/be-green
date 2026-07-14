@@ -6,13 +6,16 @@ export interface AdminProduct {
   name: string
   tagline: string
   description: string
-  main_image: string
-  price: number | null
-  available: boolean
-  nutrition: Record<string, string>
-  health_benefits: string[]
+  main_image: string | null
   gallery_images: string[]
-  created_at?: string
+  price: number | null
+  weight: string | null
+  nutrition: any // JSON
+  health_benefits: string[]
+  available: boolean
+  in_stock: boolean
+  featured: boolean
+  created_at: string
 }
 
 export type ProductFormData = Omit<AdminProduct, 'id' | 'created_at'>

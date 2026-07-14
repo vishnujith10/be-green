@@ -9,6 +9,7 @@ export interface Product {
   image: string
   price?: number
   status: 'available' | 'coming-soon'
+  in_stock: boolean
   nutrition: {
     protein: string
     vitamins: string
@@ -36,6 +37,7 @@ function mapProduct(row: any): Product {
     image: row.main_image,
     price: row.price ? Number(row.price) : undefined,
     status: row.available ? 'available' : 'coming-soon',
+    in_stock: row.in_stock ?? true,
     nutrition: row.nutrition || {},
     benefits: row.health_benefits || [],
     gallery: row.gallery_images || []

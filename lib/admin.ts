@@ -1,4 +1,4 @@
-import { createClient } from '@/utils/supabase/server'
+import { createAdminClient } from '@/utils/supabase/service'
 
 export interface AdminProduct {
   id: string
@@ -22,7 +22,7 @@ export type ProductFormData = Omit<AdminProduct, 'id' | 'created_at'>
 
 // Fetch all products (both available and unavailable)
 export async function getAllProducts(): Promise<AdminProduct[]> {
-  const supabase = await createClient()
+  const supabase = createAdminClient()
   const { data, error } = await supabase
     .from('products')
     .select('*')
@@ -34,7 +34,7 @@ export async function getAllProducts(): Promise<AdminProduct[]> {
 
 // Fetch single product by ID
 export async function getProductById(id: string): Promise<AdminProduct | null> {
-  const supabase = await createClient()
+  const supabase = createAdminClient()
   const { data, error } = await supabase
     .from('products')
     .select('*')
@@ -47,7 +47,7 @@ export async function getProductById(id: string): Promise<AdminProduct | null> {
 
 // Add a new product
 export async function addProduct(product: ProductFormData): Promise<AdminProduct> {
-  const supabase = await createClient()
+  const supabase = createAdminClient()
   const { data, error } = await supabase
     .from('products')
     .insert([product])
@@ -59,7 +59,7 @@ export async function addProduct(product: ProductFormData): Promise<AdminProduct
 
 // Update an existing product
 export async function updateProduct(id: string, product: Partial<ProductFormData>): Promise<AdminProduct> {
-  const supabase = await createClient()
+  const supabase = createAdminClient()
   const { data, error } = await supabase
     .from('products')
     .update(product)
@@ -72,7 +72,7 @@ export async function updateProduct(id: string, product: Partial<ProductFormData
 
 // Delete a product
 export async function deleteProduct(id: string): Promise<void> {
-  const supabase = await createClient()
+  const supabase = createAdminClient()
   const { error } = await supabase
     .from('products')
     .delete()
@@ -83,7 +83,7 @@ export async function deleteProduct(id: string): Promise<void> {
 
 // Toggle product availability
 export async function toggleProductAvailability(id: string, available: boolean): Promise<AdminProduct> {
-  const supabase = await createClient()
+  const supabase = createAdminClient()
   const { data, error } = await supabase
     .from('products')
     .update({ available })
@@ -96,7 +96,7 @@ export async function toggleProductAvailability(id: string, available: boolean):
 
 // Verify if a user is admin
 export async function verifyAdmin(userId: string): Promise<boolean> {
-  const supabase = await createClient()
+  const supabase = createAdminClient()
   const { data } = await supabase
     .from('users')
     .select('role')

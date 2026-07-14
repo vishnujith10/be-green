@@ -34,7 +34,7 @@ Kindly share varieties, pricing, and delivery details.`
 
         <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
           {price && (
-            <div className="text-5xl font-bold">${price}</div>
+            <div className="text-5xl font-bold">₹{price}</div>
           )}
           <button
             onClick={handleWhatsAppOrder}

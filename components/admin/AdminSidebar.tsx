@@ -3,24 +3,18 @@
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { clearUser } from '@/lib/user'
-import {
-  LayoutDashboard,
-  Package,
-  LogOut,
-  Leaf,
-  ChevronRight,
-} from 'lucide-react'
+import { Package, LogOut, Leaf, ChevronRight, ChefHat } from 'lucide-react'
 
 const navItems = [
-  {
-    label: 'Dashboard',
-    href: '/admin/dashboard',
-    icon: LayoutDashboard,
-  },
   {
     label: 'Products',
     href: '/admin/dashboard',
     icon: Package,
+  },
+  {
+    label: 'Recipes',
+    href: '/admin/recipes',
+    icon: ChefHat,
   },
 ]
 

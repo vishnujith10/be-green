@@ -105,3 +105,75 @@ export async function verifyAdmin(userId: string): Promise<boolean> {
 
   return data?.role === 'admin'
 }
+
+// ─── Recipes ────────────────────────────────────────────────────────────────
+
+export interface AdminRecipe {
+  id: string
+  title: string
+  emoji: string | null
+  tagline: string | null
+  image_url: string | null
+  ingredients: string[]
+  preparing: string | null
+  available: boolean
+  created_at: string
+}
+
+export type RecipeFormData = Omit<AdminRecipe, 'id' | 'created_at'>
+
+export async function getAllRecipes(): Promise<AdminRecipe[]> {
+  const supabase = createAdminClient()
+  const { data, error } = await supabase
+    .from('recipes')
+    .select('*')
+    .order('created_at', { ascending: false })
+
+  if (error) throw new Error(error.message)
+  return data || []
+}
+
+export async function getRecipeById(id: string): Promise<AdminRecipe | null> {
+  const supabase = createAdminClient()
+  const { data, error } = await supabase
+    .from('recipes')
+    .select('*')
+    .eq('id', id)
+    .single()
+
+  if (error) return null
+  return data
+}
+
+export async function addRecipe(recipe: RecipeFormData): Promise<AdminRecipe> {
+  const supabase = createAdminClient()
+  const { data, error } = await supabase
+    .from('recipes')
+    .insert([recipe])
+    .select()
+
+  if (error) throw new Error(error.message)
+  return data?.[0] as AdminRecipe
+}
+
+export async function updateRecipe(id: string, recipe: Partial<RecipeFormData>): Promise<AdminRecipe> {
+  const supabase = createAdminClient()
+  const { data, error } = await supabase
+    .from('recipes')
+    .update(recipe)
+    .eq('id', id)
+    .select()
+
+  if (error) throw new Error(error.message)
+  return data?.[0] as AdminRecipe
+}
+
+export async function deleteRecipe(id: string): Promise<void> {
+  const supabase = createAdminClient()
+  const { error } = await supabase
+    .from('recipes')
+    .delete()
+    .eq('id', id)
+
+  if (error) throw new Error(error.message)
+}

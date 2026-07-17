@@ -40,7 +40,7 @@ export default function AdminRecipesLayout({
   return (
     <div className="min-h-screen bg-[#F8FAF8]">
       <AdminSidebar />
-      <main className="pt-24 md:pt-8 md:ml-64 px-4 sm:px-6 md:px-8 pb-8">
+      <main className="pt-32 md:pt-8 md:ml-64 px-4 sm:px-6 md:px-8 pb-8">
         {children}
       </main>
     </div>

@@ -94,7 +94,7 @@ export default function AdminLoginPage() {
                 id="admin-email"
                 type="text"
                 required
-                value={email}
+                defaultValue={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full px-4 py-3 rounded-xl bg-white/[0.07] border border-white/10 text-white text-sm placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-emerald-500/40 focus:border-emerald-500/40 transition-all"
                 placeholder="admin@begreen.com"
@@ -111,7 +111,7 @@ export default function AdminLoginPage() {
                   id="admin-password"
                   type={showPassword ? 'text' : 'password'}
                   required
-                  value={password}
+                  defaultValue={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="w-full px-4 py-3 pr-12 rounded-xl bg-white/[0.07] border border-white/10 text-white text-sm placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-emerald-500/40 focus:border-emerald-500/40 transition-all"
                   placeholder="Enter your password"

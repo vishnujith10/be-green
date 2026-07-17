@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { getComingSoonProducts } from '@/lib/products'
 import { Clock } from 'lucide-react'
+import { Recipes } from '@/components/Recipes'
 
 export async function ComingSoon() {
   const products = await getComingSoonProducts()
@@ -43,6 +44,9 @@ export async function ComingSoon() {
             </div>
           ))}
         </div>
+
+        {/* Recipes / Ingredients Section */}
+        <Recipes />
       </div>
     </section>
   )

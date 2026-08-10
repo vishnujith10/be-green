@@ -97,7 +97,7 @@ export default function AdminLoginPage() {
                 defaultValue={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full px-4 py-3 rounded-xl bg-white/[0.07] border border-white/10 text-white text-sm placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-emerald-500/40 focus:border-emerald-500/40 transition-all"
-                placeholder="admin@begreen.com"
+                placeholder="Enter your Email"
                 autoComplete="username"
               />
             </div>
